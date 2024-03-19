@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books View</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.usebootstrap.com/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h2 class="mb-4">All Books</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card-columns">
+                <!-- Iterate over the list of books and display each book -->
+                <div th:each="book : ${books}" class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${book.bookName}"></h5>
+                        <p class="card-text" th:text="${book.author.getAuthorName()} + ' ' + ${book.author.getAuthorSurname()}"></p>
+                        <p class="card-text" th:text="${book.bookCategory}"></p>
+                        <p class="card-text" th:text="${book.availableCopies} + ' copies available'"></p>
+                        <!-- Button group for actions -->
+                        <div class="btn-group">
+                            <form th:action="@{'/editBook/' + ${book.id}}" method="get">
+                                <button type="submit" class="btn btn-primary" >Edit</button>
+                            </form>
+                            <form th:action="@{'/deleteBook/' + ${book.id}}" method="post">
+                                <button type="submit" class="btn btn-danger" >Delete</button>
+                            </form>
+                            <form th:action="@{'/outOfStock/' + ${book.id}}" method="post">
+                                <button type="submit" class="btn btn-warning">Out of Stock</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <!-- Button group for adding, navigating to author page -->
+            <div class="btn-group">
+                <form action="/addBook" method="get">
+                    <button type="submit" class="btn btn-success">Add Book</button>
+                </form>
+
+                <button type="button" class="btn btn-info" onclick="location.href='/author-page'">Go to Authors</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
