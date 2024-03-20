@@ -2,6 +2,7 @@ package emtlab.mk.finki.ukim.service.Impl;
 
 import emtlab.mk.finki.ukim.repository.AppUserRepository;
 import jakarta.transaction.Transactional;
+import org.apache.catalina.User;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import emtlab.mk.finki.ukim.config.PasswordEncryption;
@@ -48,5 +49,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkPasswordAndRepeatedPassword(String password, String repeatedPassword) {
         return password.matches(repeatedPassword);
+    }
+
+    @Override
+    public User loadUserByUsername(String username) {
+        return (User) appUserRepository.findAppUserByUsername(username);
     }
 }

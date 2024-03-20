@@ -1,10 +1,7 @@
 package emtlab.mk.finki.ukim.web.controller.rest;
 
 import emtlab.mk.finki.ukim.model.Author;
-import emtlab.mk.finki.ukim.model.Book;
 import emtlab.mk.finki.ukim.model.dto.AuthorDto;
-import emtlab.mk.finki.ukim.model.dto.BookDto;
-import emtlab.mk.finki.ukim.repository.AuthorRepository;
 import emtlab.mk.finki.ukim.service.AuthorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

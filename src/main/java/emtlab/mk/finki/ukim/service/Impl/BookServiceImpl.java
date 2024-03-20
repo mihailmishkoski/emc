@@ -3,7 +3,7 @@ package emtlab.mk.finki.ukim.service.Impl;
 import emtlab.mk.finki.ukim.model.Author;
 import emtlab.mk.finki.ukim.model.BookCategory;
 import emtlab.mk.finki.ukim.model.dto.BookDto;
-import emtlab.mk.finki.ukim.model.events.BookCreatedEvent;
+import emtlab.mk.finki.ukim.model.events.ProductCreatedEvent;
 import emtlab.mk.finki.ukim.repository.AuthorRepository;
 import emtlab.mk.finki.ukim.repository.BookRepository;
 import emtlab.mk.finki.ukim.service.BookService;
@@ -44,7 +44,9 @@ public class BookServiceImpl implements BookService {
     public void addBook(String name, BookCategory bookCategory, Long authorId, Integer availableCopies) {
         try{
             Author author = authorRepository.findById(authorId).orElse(null);
-            bookRepository.save(new Book(name,bookCategory,author,availableCopies));
+            Book book = new Book(name,bookCategory,author,availableCopies);
+            bookRepository.save(book);
+            this.applicationEventPublisher.publishEvent(new ProductCreatedEvent(book,book.getAvailableCopies()));
         }catch (DataAccessException e){
             throw new MyCustomException("Cannot add a new book", e);
         }
@@ -60,7 +62,7 @@ public class BookServiceImpl implements BookService {
             int availableCopies = bookDto.getAvailableCopies();
             Book book = new Book(name,bookCategory,author,availableCopies);
             bookRepository.save(book);
-            applicationEventPublisher.publishEvent(book);
+            this.applicationEventPublisher.publishEvent(new ProductCreatedEvent(book,book.getAvailableCopies()));
             return Optional.of(book);
         }catch (DataAccessException e){
             throw new MyCustomException("Cannot add a new book", e);

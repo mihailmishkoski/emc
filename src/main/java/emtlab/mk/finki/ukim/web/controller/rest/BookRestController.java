@@ -3,8 +3,10 @@ package emtlab.mk.finki.ukim.web.controller.rest;
 import emtlab.mk.finki.ukim.model.Book;
 
 import emtlab.mk.finki.ukim.model.dto.BookDto;
-import emtlab.mk.finki.ukim.service.AuthorService;
+
+
 import emtlab.mk.finki.ukim.service.BookService;
+
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import java.util.List;
 public class BookRestController {
 
     private final BookService bookService;
+
 
     public BookRestController(BookService bookService) {
         this.bookService = bookService;

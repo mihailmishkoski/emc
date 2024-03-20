@@ -1,5 +1,7 @@
 package emtlab.mk.finki.ukim.service;
 
+import org.apache.catalina.User;
+
 public interface UserService {
     boolean LogIn(String username, String password);
 
@@ -9,4 +11,5 @@ public interface UserService {
 
     boolean checkPasswordAndRepeatedPassword(String password, String repeatedPassword);
 
+    User loadUserByUsername(String username);
 }
