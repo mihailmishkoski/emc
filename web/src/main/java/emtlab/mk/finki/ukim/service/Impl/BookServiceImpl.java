@@ -133,6 +133,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getBookByName(String name) {
-        return bookRepository.findAllByBookNameContaining(name);
+        return bookRepository.findAllByBookNameContainingIgnoreCase(name.toLowerCase());
     }
 }

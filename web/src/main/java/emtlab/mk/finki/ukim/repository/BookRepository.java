@@ -7,5 +7,5 @@ import emtlab.mk.finki.ukim.model.Book;
 import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book,Long> {
-    List<Book> findAllByBookNameContaining(String name);
+    List<Book> findAllByBookNameContainingIgnoreCase(String name);
 }

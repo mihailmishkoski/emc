@@ -10,9 +10,6 @@ import Header from "../Header/header";
 import Categories from "../Categories/CategoriesList/categories";
 
 
-
-
-
 class App extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +17,8 @@ class App extends Component {
             books: [],
             authors: [],
             categories: [],
-            selectedBook: {}
+            selectedBook: {},
+            searchBook: []
         }
     }
 
@@ -29,7 +27,6 @@ class App extends Component {
             <Router>
                 <Header/>
                 <main>
-
                     <div className={"container"}>
                         <br/>
 
@@ -70,12 +67,18 @@ class App extends Component {
 
 
     searchBook = (name) => {
-        EshopService.getBookByName(name)
-            .then((data) => {
-                this.setState({
-                    books: data.data
+        if(name.isEmpty || name === "")
+        {
+            this.loadBooks();
+        }
+        else{
+            EshopService.getBookByName(name)
+                .then((data) => {
+                    this.setState({
+                        books: data.data
+                    })
                 })
-            })
+        }
     }
     loadBooks = () => {
         EshopService.fetchBooks()

@@ -62,9 +62,9 @@ public class BookRestController {
         bookService.outOfStock(id);
         return "redirect:/books";
     }
-    /*@GetMapping("/{name}")
+    @GetMapping("/getByName/{name}")
     public List<Book> getBookById(@PathVariable String name)
     {
         return bookService.getBookByName(name);
-    }*/
+    }
 }

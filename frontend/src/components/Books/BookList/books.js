@@ -1,27 +1,29 @@
-import React from "react";
+import React, {useState} from "react";
 import BookTerm from "../BookTerm/bookTerm";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import EshopService from "../../../repository/eshop.Repository";
 
 const Books = (props) => {
-    /*const history = useHistory();
 
-    const onFormSubmit = (e) => {
-        e.preventDefault();
-        const bookName = e.target.elements.q.value;
-        props.searchBook(bookName);
-        history.push("/books");
-    };*/
+
+    const handleSearchChange = (event) => {
+
+        props.onSearchBooks(event.target.value)
+
+    };
 
     return (
+
         <div className={"container mm-4 mt-5"}>
-            {/*<div className={"row"}>
-                <form onSubmit={onFormSubmit}>
-                    <label htmlFor="searchInput">Search:</label>
-                    <input type="text" id="searchInput" name="q" placeholder="Enter your search query" />
-                    <button type="submit">Search</button>
-                </form>
-            </div>*/}
             <div className={"row"}>
+                {/* Search Input */}
+                <div className="row">
+                    <input
+                        type="text"
+                        onChange={handleSearchChange}
+                        placeholder="Search books..."
+                    />
+                </div>
                 <div className={"row"}>
                     <table className={"table table-striped"}>
                         <thead>
@@ -37,7 +39,6 @@ const Books = (props) => {
                                 onDelete={props.onDelete}
                                 onOutOfStock={props.onOutOfStock}
                                 onEditBook={props.onEdit}
-                               /* onSearchBook={props.onSearchBooks}*/
                             />
                         ))}
                         </tbody>

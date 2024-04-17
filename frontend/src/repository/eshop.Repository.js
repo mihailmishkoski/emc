@@ -31,9 +31,9 @@ const EshopService = {
     getBook:(id) => {
         return axios.get(`/books/${id}`)
     },
-    /*getBookByName:(name) => {
-        return axios.get(`/books/${name}`)
-    },*/
+    getBookByName:(name) => {
+        return axios.get(`/books/getByName/${name}`)
+    },
     deleteBook: (id) => {
         return axios.delete(`/books/delete/${id}`);
     },
